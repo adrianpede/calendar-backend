@@ -18,7 +18,10 @@ const validarJWT = (req, res = response, next) => {
             token,
             process.env.SECRET_JWT_SEED
         );
-        console.log(payload);      } catch (error) {
+        req.name=uid;
+        req.id= uid;
+      
+        } catch (error) {
         return res.status(401).json({
             ok:false,
             msg: 'Token no valido'

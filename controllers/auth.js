@@ -15,7 +15,7 @@ const crearUsuario = async(req, res = response) => {
      msg:'Un usuario existe con ese correo'
     });
   }
-   usuario = new Usuario(req.body);
+    usuario = new Usuario(req.body);
 
    // Encriptar contraseña
    const salt = bcrypt.genSaltSync();
@@ -64,7 +64,7 @@ const crearUsuario = async(req, res = response) => {
     if(!validPassword){
       return res.status(400).json({
         ok:false,
-        password:'Password incorrecto'
+        msg:'Password incorrecto'
       });
     }
   
@@ -89,16 +89,18 @@ const crearUsuario = async(req, res = response) => {
    }    
   }
 
-  const revalidarToquen = (req, res = response) => {
-  
+  const revalidarToken = (req, res = response) => {
+    const uid = req.uid;
+    const name = req.name;
     res.json({
       ok: true,
-      msg: 'renew'
+      uid,
+      name
     })
   }
 
   module.exports = {
     crearUsuario,
     loginUsuario,
-    revalidarToquen
+    revalidarToken
   }
